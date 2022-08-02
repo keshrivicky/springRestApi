@@ -16,8 +16,8 @@ public class BookServiceIMPL implements BookService{
 	private BookDAOIMPL bookDAOIMPL;
 	@Override
 	public Book createBook(Book book) {
-		// TODO Auto-generated method stub
-		return null;
+		bookDAOIMPL.createBook(book);
+		return book;
 	}
 
 	@Override
@@ -34,8 +34,8 @@ public class BookServiceIMPL implements BookService{
 
 	@Override
 	public Book getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Book book= bookDAOIMPL.getById(id);
+		return book;
 	}
 
 	@Override

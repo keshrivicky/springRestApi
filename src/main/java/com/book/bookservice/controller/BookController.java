@@ -7,7 +7,11 @@ import javax.swing.text.html.FormSubmitEvent.MethodType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,18 +41,26 @@ public class BookController {
 	
 	@GetMapping("/")
 	public List<Book>  getBookDetail() {
-		//List<Book> book  = bookServiceIMPL.getAllBook();
-		List<Book> book  = new ArrayList<>();
-		
-		Book book1 = new Book("vicky","title",10);
-		Book book2 = new Book("vicky1","title1",100);
-		Book book3 = new Book("vicky2","title2",1000);
-		Book book4 = new Book("vicky3","title3",10000);
-		book.add(book1);
-		book.add(book2);
-		book.add(book3);
-		book.add(book4);
+		List<Book> book  = bookServiceIMPL.getAllBook();
 		return book;
+	}
+	
+	@GetMapping("/{id}")
+	public Book  getBookDetailByID(@PathVariable("id") int id) {
+		Book book  = bookServiceIMPL.getById(id);
+		return book;
+	}
+	
+	@PostMapping("/")
+	public Book  createBook(@RequestBody Book book) {
+		Book book1  = bookServiceIMPL.createBook(book);
+		return book1;
+	}
+	
+	@DeleteMapping("/{id}")
+	public void  deleteByID(@PathVariable("id") int id) {
+		 bookServiceIMPL.getById(id);
+		
 	}
 	
 	

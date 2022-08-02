@@ -17,8 +17,9 @@ public class BookDAOIMPL implements BookDAO {
 
 	@Override
 	public Book createBook(Book book) {
-		// TODO Auto-generated method stub
-		return null;
+		String query= "INSERT INTO employee.book (bookid,author_name,title,price) VALUES (?,?,?,?)";
+		  jdbcTemplate.update(query,book.getBookId(),  book.getAuthorName(),book.getTitle(),book.getPrice());
+		return book;
 	}
 
 	@Override
@@ -35,13 +36,16 @@ public class BookDAOIMPL implements BookDAO {
 
 	@Override
 	public Book getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String query= "SELECT * FROM employee.book WHERE bookid=?";
+		 Book book = jdbcTemplate.queryForObject(query,new BookRowMapper(),id);
+		return book;
+		
 	}
 
 	@Override
 	public List<Book> getAllBook() {
-		 List<Book> book = jdbcTemplate.query("SELECT * FROM employee.book", new BookRowMapper());
+		String query= "SELECT * FROM employee.book";
+		 List<Book> book = jdbcTemplate.query(query,new BookRowMapper());
 		return book;
 	}
 
